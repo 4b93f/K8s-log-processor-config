@@ -12,6 +12,10 @@ spec:
     metadata:
       labels:
         app: worker
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
     spec:
       containers:
         - name: worker
@@ -23,6 +27,9 @@ spec:
             limits:
               cpu: '1'
               memory: 512Mi
+          ports:
+            - name: metrics
+              containerPort: 8000
           env:
             - name: SQS_QUEUE_URL
               value: http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/sqs-queue
