@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: ghcr.io/4b93f/k8s-prod-api:latest
+        image: ghcr.io/4b93f-organization/k8s-prod-api:latest
         resources:
           requests:
             cpu: "500m"
