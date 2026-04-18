@@ -1,0 +1,42 @@
+namespace: app
+
+api:
+  image: ghcr.io/4b93f-organization/k8s-prod-api:latest
+  replicas: 1
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "256Mi"
+    limits:
+      cpu: "1"
+      memory: "512Mi"
+  service:
+    type: NodePort
+    port: 8000
+  env:
+    AWS_ENDPOINT_URL: "http://host.minikube.internal:4566"
+    AWS_REGION: "us-east-1"
+    AWS_ACCESS_KEY_ID: "placeholder"
+    AWS_SECRET_ACCESS_KEY: "placeholder"
+    SQS_QUEUE_URL: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/sqs-queue"
+    S3_BUCKET: "log-processing"
+
+worker:
+  image: ghcr.io/4b93f-organization/k8s-prod-worker:latest
+  replicas: 2
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "256Mi"
+    limits:
+      cpu: "1"
+      memory: "512Mi"
+  metrics:
+    enabled: true
+    port: 8000
+  env:
+    SQS_QUEUE_URL: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/sqs-queue"
+    AWS_ACCESS_KEY_ID: "placeholder"
+    AWS_SECRET_ACCESS_KEY: "placeholder"
+    AWS_ENDPOINT_URL: "http://host.minikube.internal:4566"
+    AWS_REGION: "us-east-1"

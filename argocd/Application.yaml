@@ -8,9 +8,10 @@ spec:
   source:
     repoURL: https://github.com/4b93f-organization/k8s-prod-config
     targetRevision: HEAD
-    path: k8s
-    directory:
-      recurse: true
+    path: chart
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: app
@@ -20,3 +21,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true

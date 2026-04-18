@@ -1,8 +1,9 @@
+{{- if .Values.worker.metrics.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: worker-metrics
-  namespace: app
+  namespace: {{ .Values.namespace }}
   labels:
     release: argocd-monitoring
 spec:
@@ -13,3 +14,4 @@ spec:
     - port: metrics
       path: /metrics
       interval: 15s
+{{- end }}

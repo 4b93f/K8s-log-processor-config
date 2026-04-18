@@ -1,0 +1,6 @@
+apiVersion: v2
+name: k8s-prod
+description: Production-ready k8s log processing app
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

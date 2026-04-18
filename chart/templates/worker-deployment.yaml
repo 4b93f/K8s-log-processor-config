@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.worker.replicas }}
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+      {{- if .Values.worker.metrics.enabled }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: {{ .Values.worker.metrics.port | quote }}
+        prometheus.io/path: "/metrics"
+      {{- end }}
+    spec:
+      containers:
+        - name: worker
+          image: {{ .Values.worker.image }}
+          resources:
+            requests:
+              cpu: {{ .Values.worker.resources.requests.cpu | quote }}
+              memory: {{ .Values.worker.resources.requests.memory | quote }}
+            limits:
+              cpu: {{ .Values.worker.resources.limits.cpu | quote }}
+              memory: {{ .Values.worker.resources.limits.memory | quote }}
+          {{- if .Values.worker.metrics.enabled }}
+          ports:
+            - name: metrics
+              containerPort: {{ .Values.worker.metrics.port }}
+          {{- end }}
+          env:
+            {{- range $key, $value := .Values.worker.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}

@@ -1,0 +1,105 @@
+{
+  "title": "Worker Metrics",
+  "uid": "worker-metrics",
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "refresh": "10s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Messages Processed (rate)",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "targets": [
+        {
+          "expr": "rate(worker_messages_processed_total[5m])",
+          "legendFormat": "processed/s"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Messages Failed (rate)",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "targets": [
+        {
+          "expr": "rate(worker_messages_failed_total[5m])",
+          "legendFormat": "failed/s"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "OCR Processed Total",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 8, "w": 6, "h": 4 },
+      "targets": [
+        {
+          "expr": "sum(worker_ocr_processed_total)",
+          "legendFormat": "OCR jobs"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "OCR Failed Total",
+      "type": "stat",
+      "gridPos": { "x": 6, "y": 8, "w": 6, "h": 4 },
+      "targets": [
+        {
+          "expr": "sum(worker_ocr_failed_total)",
+          "legendFormat": "OCR failures"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Lines Processed Total",
+      "type": "stat",
+      "gridPos": { "x": 12, "y": 8, "w": 6, "h": 4 },
+      "targets": [
+        {
+          "expr": "sum(worker_lines_processed_total)",
+          "legendFormat": "lines"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "HTTP Errors Found Total",
+      "type": "stat",
+      "gridPos": { "x": 18, "y": 8, "w": 6, "h": 4 },
+      "targets": [
+        {
+          "expr": "sum(worker_http_errors_found_total)",
+          "legendFormat": "http errors"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Avg Processing Duration (s)",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 12, "w": 12, "h": 8 },
+      "targets": [
+        {
+          "expr": "rate(worker_processing_duration_seconds_sum[5m]) / rate(worker_processing_duration_seconds_count[5m])",
+          "legendFormat": "avg duration"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "OCR Failure Rate",
+      "type": "timeseries",
+      "gridPos": { "x": 12, "y": 12, "w": 12, "h": 8 },
+      "targets": [
+        {
+          "expr": "rate(worker_ocr_failed_total[5m]) / rate(worker_ocr_processed_total[5m])",
+          "legendFormat": "ocr failure rate"
+        }
+      ]
+    }
+  ]
+}
