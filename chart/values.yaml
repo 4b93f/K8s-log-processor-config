@@ -18,7 +18,7 @@ api:
     AWS_REGION: "us-east-1"
     AWS_ACCESS_KEY_ID: "placeholder"
     AWS_SECRET_ACCESS_KEY: "placeholder"
-    SQS_QUEUE_URL: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/sqs-queue"
+    SQS_QUEUE_URL: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/log-processing"
     S3_BUCKET: "log-processing"
 
 worker:
@@ -35,7 +35,7 @@ worker:
     enabled: true
     port: 8000
   env:
-    SQS_QUEUE_URL: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/sqs-queue"
+    SQS_QUEUE_URL: "http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/log-processing"
     AWS_ACCESS_KEY_ID: "placeholder"
     AWS_SECRET_ACCESS_KEY: "placeholder"
     AWS_ENDPOINT_URL: "http://host.minikube.internal:4566"
