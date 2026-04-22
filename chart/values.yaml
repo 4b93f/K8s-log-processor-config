@@ -1,7 +1,7 @@
 namespace: app
 
 api:
-  image: ghcr.io/4b93f-organization/k8s-prod-api:latest
+  image: ghcr.io/4b93f-organization/k8s-log-processor-api:latest
   replicas: 1
   resources:
     requests:
@@ -22,7 +22,7 @@ api:
     S3_BUCKET: "log-processing"
 
 worker:
-  image: ghcr.io/4b93f-organization/k8s-prod-worker:latest
+  image: ghcr.io/4b93f-organization/k8s-log-processor-worker:latest
   replicas: 2
   resources:
     requests:

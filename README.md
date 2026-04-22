@@ -1,12 +1,12 @@
-# k8s-prod-config
+# K8s-log-processor-config
 
-GitOps config repo for [k8s-prod](https://github.com/4b93f-organization/k8s-prod). ArgoCD watches this repo — push a change, the cluster updates automatically.
+GitOps config repo for [K8s-log-processor](https://github.com/4b93f-organization/K8s-log-processor). ArgoCD watches this repo — push a change, the cluster updates automatically.
 
 ## How it works
 
 ```mermaid
 flowchart LR
-    Dev -->|git push| Repo[k8s-prod-config]
+    Dev -->|git push| Repo[K8s-log-processor-config]
     Repo -->|detected by| ArgoCD
     ArgoCD -->|helm upgrade| Cluster[Kubernetes]
 ```
@@ -14,7 +14,7 @@ flowchart LR
 ## Structure
 
 ```
-k8s-prod-config/
+K8s-log-processor-config/
 ├── argocd/
 │   ├── application.yaml        # ArgoCD app — deploys the Helm chart
 │   └── monitor.yaml            # ArgoCD app — deploys kube-prometheus-stack
@@ -39,7 +39,7 @@ All values are in `chart/values.yaml` — images, replicas, resources, env vars.
 To change the API image:
 ```yaml
 api:
-  image: ghcr.io/<org>/k8s-prod-api:<tag>
+  image: ghcr.io/<org>/K8s-log-processor-api:<tag>
 ```
 
 ## Monitoring
