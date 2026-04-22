@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/4b93f-organization/k8s-prod-config
+    repoURL: https://github.com/4b93f-organization/K8s-log-processor-config
     targetRevision: HEAD
     path: chart
     helm:
